@@ -473,4 +473,113 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get passwordChanged =>
       'Пароль изменён. На других устройствах выполнен выход.';
+
+  @override
+  String get frequencyFiveMinutes => 'Каждые 5 минут (тест)';
+
+  @override
+  String roundTitle(int number) {
+    return 'Раунд $number';
+  }
+
+  @override
+  String turnOfCount(int turn, int count) {
+    return 'Очередь $turn из $count';
+  }
+
+  @override
+  String receivesNow(String name) {
+    return 'Сейчас получает $name';
+  }
+
+  @override
+  String get youReceiveNow => 'Сейчас получаете вы';
+
+  @override
+  String nextTurnAt(String time) {
+    return 'Следующая очередь в $time';
+  }
+
+  @override
+  String roundStartsAt(String time) {
+    return 'Раунд начнётся в $time';
+  }
+
+  @override
+  String get roundEndingNow =>
+      'Последняя очередь закончилась. Комната скоро снова откроется.';
+
+  @override
+  String roundsFinished(int count) {
+    return 'Завершённых раундов: $count';
+  }
+
+  @override
+  String startRoundNumber(int number) {
+    return 'Начать раунд $number';
+  }
+
+  @override
+  String get roundsHistory => 'История раундов';
+
+  @override
+  String get noRoundsYet =>
+      'Раундов пока нет. История появится после начала первого раунда.';
+
+  @override
+  String get roundStatusActive => 'Идёт';
+
+  @override
+  String get roundStatusCompleted => 'Завершён';
+
+  @override
+  String roundDates(String start, String end) {
+    return '$start – $end';
+  }
+
+  @override
+  String get changeMemberCount => 'Изменить число участников';
+
+  @override
+  String get maxMembersSaved => 'Число участников обновлено.';
+
+  @override
+  String get removeMember => 'Удалить из комнаты';
+
+  @override
+  String removeMemberConfirm(String name) {
+    return 'Удалить $name из комнаты? История платежей сохранится.';
+  }
+
+  @override
+  String get remove => 'Удалить';
+
+  @override
+  String memberRemoved(String name) {
+    return '$name удалён(а).';
+  }
+
+  @override
+  String get leaveRoom => 'Покинуть комнату';
+
+  @override
+  String get leaveRoomConfirm =>
+      'Покинуть комнату? Позже вас можно будет пригласить снова.';
+
+  @override
+  String get leave => 'Покинуть';
+
+  @override
+  String get late => 'Просрочено';
+
+  @override
+  String get nowLabel => 'Сейчас';
+
+  @override
+  String get fiveMinuteStartsNow =>
+      'Тестовая комната: раунд начнётся сейчас, очередь меняется каждые 5 минут.';
+
+  @override
+  String get betweenRoundsNote =>
+      'Между раундами можно приглашать людей, менять число участников и удалять участников. Участники могут выйти.';
 }

@@ -477,4 +477,113 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get passwordChanged =>
       'Mot de passe changé. Vos autres appareils ont été déconnectés.';
+
+  @override
+  String get frequencyFiveMinutes => 'Toutes les 5 minutes (test)';
+
+  @override
+  String roundTitle(int number) {
+    return 'Tour de rotation $number';
+  }
+
+  @override
+  String turnOfCount(int turn, int count) {
+    return 'Tour $turn sur $count';
+  }
+
+  @override
+  String receivesNow(String name) {
+    return '$name reçoit maintenant';
+  }
+
+  @override
+  String get youReceiveNow => 'Vous recevez maintenant';
+
+  @override
+  String nextTurnAt(String time) {
+    return 'Tour suivant à $time';
+  }
+
+  @override
+  String roundStartsAt(String time) {
+    return 'La rotation commence à $time';
+  }
+
+  @override
+  String get roundEndingNow =>
+      'Le dernier tour est terminé. La cagnotte rouvre dans un instant.';
+
+  @override
+  String roundsFinished(int count) {
+    return 'Rotations terminées : $count';
+  }
+
+  @override
+  String startRoundNumber(int number) {
+    return 'Démarrer la rotation $number';
+  }
+
+  @override
+  String get roundsHistory => 'Historique des rotations';
+
+  @override
+  String get noRoundsYet =>
+      'Aucune rotation pour l\'instant. L\'historique apparaît après la première.';
+
+  @override
+  String get roundStatusActive => 'En cours';
+
+  @override
+  String get roundStatusCompleted => 'Terminée';
+
+  @override
+  String roundDates(String start, String end) {
+    return '$start – $end';
+  }
+
+  @override
+  String get changeMemberCount => 'Modifier le nombre de membres';
+
+  @override
+  String get maxMembersSaved => 'Nombre de membres mis à jour.';
+
+  @override
+  String get removeMember => 'Retirer de la cagnotte';
+
+  @override
+  String removeMemberConfirm(String name) {
+    return 'Retirer $name de la cagnotte ? Son historique de paiements est conservé.';
+  }
+
+  @override
+  String get remove => 'Retirer';
+
+  @override
+  String memberRemoved(String name) {
+    return '$name a été retiré.';
+  }
+
+  @override
+  String get leaveRoom => 'Quitter la cagnotte';
+
+  @override
+  String get leaveRoomConfirm =>
+      'Quitter cette cagnotte ? Vous pourrez être réinvité plus tard.';
+
+  @override
+  String get leave => 'Quitter';
+
+  @override
+  String get late => 'En retard';
+
+  @override
+  String get nowLabel => 'Maintenant';
+
+  @override
+  String get fiveMinuteStartsNow =>
+      'Cagnotte de test : la rotation commence maintenant et le tour change toutes les 5 minutes.';
+
+  @override
+  String get betweenRoundsNote =>
+      'Entre deux rotations, vous pouvez inviter, changer le nombre de membres et retirer des membres. Les membres peuvent partir.';
 }

@@ -16,7 +16,7 @@ void main() {
     final room = Room.fromJson({
       'id': 14, 'name': 'Family Jamia', 'description': null, 'contributionAmount': 1000,
       'currency': 'OMR', 'frequency': 'MONTHLY', 'maxMembers': 3, 'status': 'OPEN',
-      'turnOrderMethod': null, 'startDate': null, 'creatorUserId': 45, 'createdAt': '2026-09-29T22:55:38',
+      'creatorUserId': 45, 'createdAt': '2026-09-29T22:55:38', 'currentRound': null, 'completedRounds': 2,
       'members': [
         {'userId': 45, 'firstName': 'Salim', 'lastName': 'Al-Mughairi', 'turnPosition': null, 'hasProfilePhoto': false},
       ],
@@ -24,16 +24,39 @@ void main() {
     expect(room.name, 'Family Jamia');
     expect(room.isOpen, isTrue);
     expect(room.members.single.fullName, 'Salim Al-Mughairi');
+    expect(room.currentRound, isNull);
+    expect(room.completedRounds, 2);
+  });
+
+  test('Room.fromJson reads the running round (who receives now, when the turn moves on)', () {
+    final room = Room.fromJson({
+      'id': 20, 'name': 'Test', 'description': null, 'contributionAmount': 10, 'currency': 'OMR',
+      'frequency': 'FIVE_MINUTES', 'maxMembers': 3, 'status': 'ACTIVE', 'creatorUserId': 1,
+      'createdAt': '2026-09-30T14:00:00', 'members': [], 'completedRounds': 0,
+      'currentRound': {
+        'roundNumber': 1, 'status': 'ACTIVE', 'turnOrderMethod': 'RANDOM',
+        'startedAt': '2026-09-30T14:00:00', 'endsAt': '2026-09-30T14:15:00', 'completedAt': null,
+        'turnCount': 3, 'currentTurn': 2, 'currentRecipientUserId': 7,
+        'currentTurnEndsAt': '2026-09-30T14:10:00', 'paymentsTotal': 6, 'paymentsReceived': 1,
+      },
+    });
+    expect(room.isFiveMinuteTest, isTrue);
+    expect(room.currentRound!.isRunning, isTrue);
+    expect(room.currentRound!.currentTurn, 2);
+    expect(room.currentRound!.currentRecipientUserId, 7);
+    expect(room.currentRound!.currentTurnEndsAt, DateTime(2026, 9, 30, 14, 10));
   });
 
   test('Contribution.fromJson reads dates, people and amounts', () {
     final c = Contribution.fromJson({
-      'id': 1, 'cycleNumber': 2, 'dueDate': '2026-11-30', 'amount': 1000.5, 'status': 'PAID',
+      'id': 1, 'roundNumber': 1, 'cycleNumber': 2, 'dueAt': '2026-11-30T00:00:00',
+      'turnEndsAt': '2026-12-30T00:00:00', 'amount': 1000.5, 'status': 'PENDING', 'late': true,
       'paidAt': null, 'confirmedAt': null,
       'payer': {'userId': 1, 'firstName': 'A', 'lastName': 'B', 'turnPosition': 1, 'hasProfilePhoto': false},
       'recipient': {'userId': 2, 'firstName': 'C', 'lastName': 'D', 'turnPosition': 2, 'hasProfilePhoto': false},
     });
-    expect(c.dueDate, DateTime(2026, 11, 30));
+    expect(c.dueAt, DateTime(2026, 11, 30));
+    expect(c.late, isTrue);
     expect(c.recipient.fullName, 'C D');
     expect(c.amount, 1000.5);
   });

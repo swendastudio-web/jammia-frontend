@@ -913,6 +913,174 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password changed. Your other devices were signed out.'**
   String get passwordChanged;
+
+  /// No description provided for @frequencyFiveMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Every 5 minutes (test)'**
+  String get frequencyFiveMinutes;
+
+  /// No description provided for @roundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Round {number}'**
+  String roundTitle(int number);
+
+  /// No description provided for @turnOfCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn {turn} of {count}'**
+  String turnOfCount(int turn, int count);
+
+  /// No description provided for @receivesNow.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} receives now'**
+  String receivesNow(String name);
+
+  /// No description provided for @youReceiveNow.
+  ///
+  /// In en, this message translates to:
+  /// **'You receive now'**
+  String get youReceiveNow;
+
+  /// No description provided for @nextTurnAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Next turn at {time}'**
+  String nextTurnAt(String time);
+
+  /// No description provided for @roundStartsAt.
+  ///
+  /// In en, this message translates to:
+  /// **'The round starts at {time}'**
+  String roundStartsAt(String time);
+
+  /// No description provided for @roundEndingNow.
+  ///
+  /// In en, this message translates to:
+  /// **'The last turn has ended. The room opens again in a moment.'**
+  String get roundEndingNow;
+
+  /// No description provided for @roundsFinished.
+  ///
+  /// In en, this message translates to:
+  /// **'Finished rounds: {count}'**
+  String roundsFinished(int count);
+
+  /// No description provided for @startRoundNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Start round {number}'**
+  String startRoundNumber(int number);
+
+  /// No description provided for @roundsHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Rounds history'**
+  String get roundsHistory;
+
+  /// No description provided for @noRoundsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No rounds yet. The history appears after the first round starts.'**
+  String get noRoundsYet;
+
+  /// No description provided for @roundStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Running'**
+  String get roundStatusActive;
+
+  /// No description provided for @roundStatusCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Finished'**
+  String get roundStatusCompleted;
+
+  /// No description provided for @roundDates.
+  ///
+  /// In en, this message translates to:
+  /// **'{start} – {end}'**
+  String roundDates(String start, String end);
+
+  /// No description provided for @changeMemberCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Change number of members'**
+  String get changeMemberCount;
+
+  /// No description provided for @maxMembersSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Number of members updated.'**
+  String get maxMembersSaved;
+
+  /// No description provided for @removeMember.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove from room'**
+  String get removeMember;
+
+  /// No description provided for @removeMemberConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {name} from the room? Their payment history is kept.'**
+  String removeMemberConfirm(String name);
+
+  /// No description provided for @remove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get remove;
+
+  /// No description provided for @memberRemoved.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} was removed.'**
+  String memberRemoved(String name);
+
+  /// No description provided for @leaveRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave room'**
+  String get leaveRoom;
+
+  /// No description provided for @leaveRoomConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave this room? You can be invited again later.'**
+  String get leaveRoomConfirm;
+
+  /// No description provided for @leave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get leave;
+
+  /// No description provided for @late.
+  ///
+  /// In en, this message translates to:
+  /// **'Late'**
+  String get late;
+
+  /// No description provided for @nowLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Now'**
+  String get nowLabel;
+
+  /// No description provided for @fiveMinuteStartsNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Test room: the round starts now and the turn moves every 5 minutes.'**
+  String get fiveMinuteStartsNow;
+
+  /// No description provided for @betweenRoundsNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Between rounds you can invite people, change the number of members and remove members. Members can leave.'**
+  String get betweenRoundsNote;
 }
 
 class _AppLocalizationsDelegate

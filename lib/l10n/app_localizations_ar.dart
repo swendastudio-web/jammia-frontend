@@ -469,4 +469,112 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get passwordChanged =>
       'تم تغيير كلمة المرور. تم تسجيل الخروج من أجهزتك الأخرى.';
+
+  @override
+  String get frequencyFiveMinutes => 'كل 5 دقائق (تجربة)';
+
+  @override
+  String roundTitle(int number) {
+    return 'الجولة $number';
+  }
+
+  @override
+  String turnOfCount(int turn, int count) {
+    return 'الدور $turn من $count';
+  }
+
+  @override
+  String receivesNow(String name) {
+    return '$name يستلم الآن';
+  }
+
+  @override
+  String get youReceiveNow => 'أنت تستلم الآن';
+
+  @override
+  String nextTurnAt(String time) {
+    return 'الدور التالي في $time';
+  }
+
+  @override
+  String roundStartsAt(String time) {
+    return 'تبدأ الجولة في $time';
+  }
+
+  @override
+  String get roundEndingNow =>
+      'انتهى الدور الأخير. ستُفتح الغرفة مجدداً بعد لحظات.';
+
+  @override
+  String roundsFinished(int count) {
+    return 'الجولات المنتهية: $count';
+  }
+
+  @override
+  String startRoundNumber(int number) {
+    return 'بدء الجولة $number';
+  }
+
+  @override
+  String get roundsHistory => 'سجل الجولات';
+
+  @override
+  String get noRoundsYet =>
+      'لا توجد جولات بعد. يظهر السجل بعد بدء الجولة الأولى.';
+
+  @override
+  String get roundStatusActive => 'جارية';
+
+  @override
+  String get roundStatusCompleted => 'منتهية';
+
+  @override
+  String roundDates(String start, String end) {
+    return '$start – $end';
+  }
+
+  @override
+  String get changeMemberCount => 'تغيير عدد الأعضاء';
+
+  @override
+  String get maxMembersSaved => 'تم تحديث عدد الأعضاء.';
+
+  @override
+  String get removeMember => 'إزالة من الغرفة';
+
+  @override
+  String removeMemberConfirm(String name) {
+    return 'إزالة $name من الغرفة؟ يبقى سجل مدفوعاته محفوظاً.';
+  }
+
+  @override
+  String get remove => 'إزالة';
+
+  @override
+  String memberRemoved(String name) {
+    return 'تمت إزالة $name.';
+  }
+
+  @override
+  String get leaveRoom => 'مغادرة الغرفة';
+
+  @override
+  String get leaveRoomConfirm => 'مغادرة هذه الغرفة؟ يمكن دعوتك مجدداً لاحقاً.';
+
+  @override
+  String get leave => 'مغادرة';
+
+  @override
+  String get late => 'متأخر';
+
+  @override
+  String get nowLabel => 'الآن';
+
+  @override
+  String get fiveMinuteStartsNow =>
+      'غرفة تجربة: تبدأ الجولة الآن وينتقل الدور كل 5 دقائق.';
+
+  @override
+  String get betweenRoundsNote =>
+      'بين الجولات يمكنك دعوة أشخاص وتغيير عدد الأعضاء وإزالة أعضاء. ويمكن للأعضاء المغادرة.';
 }

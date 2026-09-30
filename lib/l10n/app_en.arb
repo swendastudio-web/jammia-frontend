@@ -325,5 +325,109 @@
   "logOut": "Log out",
   "currentPassword": "Current password",
   "newPassword": "New password",
-  "passwordChanged": "Password changed. Your other devices were signed out."
+  "passwordChanged": "Password changed. Your other devices were signed out.",
+  "frequencyFiveMinutes": "Every 5 minutes (test)",
+  "roundTitle": "Round {number}",
+  "@roundTitle": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "turnOfCount": "Turn {turn} of {count}",
+  "@turnOfCount": {
+    "placeholders": {
+      "turn": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "receivesNow": "{name} receives now",
+  "@receivesNow": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "youReceiveNow": "You receive now",
+  "nextTurnAt": "Next turn at {time}",
+  "@nextTurnAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "roundStartsAt": "The round starts at {time}",
+  "@roundStartsAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "roundEndingNow": "The last turn has ended. The room opens again in a moment.",
+  "roundsFinished": "Finished rounds: {count}",
+  "@roundsFinished": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "startRoundNumber": "Start round {number}",
+  "@startRoundNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "roundsHistory": "Rounds history",
+  "noRoundsYet": "No rounds yet. The history appears after the first round starts.",
+  "roundStatusActive": "Running",
+  "roundStatusCompleted": "Finished",
+  "roundDates": "{start} – {end}",
+  "@roundDates": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "changeMemberCount": "Change number of members",
+  "maxMembersSaved": "Number of members updated.",
+  "removeMember": "Remove from room",
+  "removeMemberConfirm": "Remove {name} from the room? Their payment history is kept.",
+  "@removeMemberConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "remove": "Remove",
+  "memberRemoved": "{name} was removed.",
+  "@memberRemoved": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveRoom": "Leave room",
+  "leaveRoomConfirm": "Leave this room? You can be invited again later.",
+  "leave": "Leave",
+  "late": "Late",
+  "nowLabel": "Now",
+  "fiveMinuteStartsNow": "Test room: the round starts now and the turn moves every 5 minutes.",
+  "betweenRoundsNote": "Between rounds you can invite people, change the number of members and remove members. Members can leave."
 }

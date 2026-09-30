@@ -472,4 +472,113 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get passwordChanged =>
       'Password changed. Your other devices were signed out.';
+
+  @override
+  String get frequencyFiveMinutes => 'Every 5 minutes (test)';
+
+  @override
+  String roundTitle(int number) {
+    return 'Round $number';
+  }
+
+  @override
+  String turnOfCount(int turn, int count) {
+    return 'Turn $turn of $count';
+  }
+
+  @override
+  String receivesNow(String name) {
+    return '$name receives now';
+  }
+
+  @override
+  String get youReceiveNow => 'You receive now';
+
+  @override
+  String nextTurnAt(String time) {
+    return 'Next turn at $time';
+  }
+
+  @override
+  String roundStartsAt(String time) {
+    return 'The round starts at $time';
+  }
+
+  @override
+  String get roundEndingNow =>
+      'The last turn has ended. The room opens again in a moment.';
+
+  @override
+  String roundsFinished(int count) {
+    return 'Finished rounds: $count';
+  }
+
+  @override
+  String startRoundNumber(int number) {
+    return 'Start round $number';
+  }
+
+  @override
+  String get roundsHistory => 'Rounds history';
+
+  @override
+  String get noRoundsYet =>
+      'No rounds yet. The history appears after the first round starts.';
+
+  @override
+  String get roundStatusActive => 'Running';
+
+  @override
+  String get roundStatusCompleted => 'Finished';
+
+  @override
+  String roundDates(String start, String end) {
+    return '$start – $end';
+  }
+
+  @override
+  String get changeMemberCount => 'Change number of members';
+
+  @override
+  String get maxMembersSaved => 'Number of members updated.';
+
+  @override
+  String get removeMember => 'Remove from room';
+
+  @override
+  String removeMemberConfirm(String name) {
+    return 'Remove $name from the room? Their payment history is kept.';
+  }
+
+  @override
+  String get remove => 'Remove';
+
+  @override
+  String memberRemoved(String name) {
+    return '$name was removed.';
+  }
+
+  @override
+  String get leaveRoom => 'Leave room';
+
+  @override
+  String get leaveRoomConfirm =>
+      'Leave this room? You can be invited again later.';
+
+  @override
+  String get leave => 'Leave';
+
+  @override
+  String get late => 'Late';
+
+  @override
+  String get nowLabel => 'Now';
+
+  @override
+  String get fiveMinuteStartsNow =>
+      'Test room: the round starts now and the turn moves every 5 minutes.';
+
+  @override
+  String get betweenRoundsNote =>
+      'Between rounds you can invite people, change the number of members and remove members. Members can leave.';
 }

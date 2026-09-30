@@ -465,4 +465,110 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get passwordChanged => 'የይለፍ ቃል ተቀይሯል። ከሌሎች መሣሪያዎችዎ ወጥተዋል።';
+
+  @override
+  String get frequencyFiveMinutes => 'በየ5 ደቂቃው (ሙከራ)';
+
+  @override
+  String roundTitle(int number) {
+    return 'ዙር $number';
+  }
+
+  @override
+  String turnOfCount(int turn, int count) {
+    return 'ተራ $turn ከ$count';
+  }
+
+  @override
+  String receivesNow(String name) {
+    return 'አሁን $name ይቀበላል';
+  }
+
+  @override
+  String get youReceiveNow => 'አሁን እርስዎ ይቀበላሉ';
+
+  @override
+  String nextTurnAt(String time) {
+    return 'ቀጣዩ ተራ በ$time';
+  }
+
+  @override
+  String roundStartsAt(String time) {
+    return 'ዙሩ በ$time ይጀምራል';
+  }
+
+  @override
+  String get roundEndingNow => 'የመጨረሻው ተራ አብቅቷል። ክፍሉ በቅርቡ እንደገና ይከፈታል።';
+
+  @override
+  String roundsFinished(int count) {
+    return 'የተጠናቀቁ ዙሮች፦ $count';
+  }
+
+  @override
+  String startRoundNumber(int number) {
+    return 'ዙር $number ጀምር';
+  }
+
+  @override
+  String get roundsHistory => 'የዙሮች ታሪክ';
+
+  @override
+  String get noRoundsYet => 'እስካሁን ዙር የለም። ታሪኩ የመጀመሪያው ዙር ሲጀመር ይታያል።';
+
+  @override
+  String get roundStatusActive => 'በሂደት ላይ';
+
+  @override
+  String get roundStatusCompleted => 'ተጠናቋል';
+
+  @override
+  String roundDates(String start, String end) {
+    return '$start – $end';
+  }
+
+  @override
+  String get changeMemberCount => 'የአባላትን ቁጥር ቀይር';
+
+  @override
+  String get maxMembersSaved => 'የአባላት ቁጥር ተዘምኗል።';
+
+  @override
+  String get removeMember => 'ከክፍሉ አስወግድ';
+
+  @override
+  String removeMemberConfirm(String name) {
+    return '$nameን ከክፍሉ ላስወግድ? የክፍያ ታሪኩ ይቀመጣል።';
+  }
+
+  @override
+  String get remove => 'አስወግድ';
+
+  @override
+  String memberRemoved(String name) {
+    return '$name ተወግዷል።';
+  }
+
+  @override
+  String get leaveRoom => 'ክፍሉን ልቀቅ';
+
+  @override
+  String get leaveRoomConfirm => 'ይህን ክፍል ይለቃሉ? በኋላ እንደገና ሊጋበዙ ይችላሉ።';
+
+  @override
+  String get leave => 'ልቀቅ';
+
+  @override
+  String get late => 'ዘግይቷል';
+
+  @override
+  String get nowLabel => 'አሁን';
+
+  @override
+  String get fiveMinuteStartsNow =>
+      'የሙከራ ክፍል፦ ዙሩ አሁን ይጀምራል፣ ተራው በየ5 ደቂቃው ይቀየራል።';
+
+  @override
+  String get betweenRoundsNote =>
+      'በዙሮች መካከል ሰዎችን መጋበዝ፣ የአባላትን ቁጥር መቀየርና አባላትን ማስወገድ ይችላሉ። አባላትም መውጣት ይችላሉ።';
 }

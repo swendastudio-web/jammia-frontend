@@ -7,8 +7,10 @@ class ContributionService {
 
   ContributionService(this._api);
 
-  Future<List<Contribution>> getContributions(int roomId) async {
-    final json = await _api.get('/api/rooms/$roomId/contributions') as List<dynamic>;
+  /// Payments of the newest round, or of [roundNumber] (history).
+  Future<List<Contribution>> getContributions(int roomId, {int? roundNumber}) async {
+    final query = roundNumber == null ? '' : '?round=$roundNumber';
+    final json = await _api.get('/api/rooms/$roomId/contributions$query') as List<dynamic>;
     return json.map((c) => Contribution.fromJson(c as Map<String, dynamic>)).toList();
   }
 

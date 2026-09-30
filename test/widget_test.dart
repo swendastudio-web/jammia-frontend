@@ -156,4 +156,55 @@ void main() {
     expect(sentBody!['preferredLanguage'], 'fr');
     expect(find.text('Mes cagnottes'), findsOneWidget); // "My rooms" in French
   });
+
+  testWidgets('room screen shows the running round: turn, who receives now, next turn time', (tester) async {
+    final storage = FakeTokenStorage();
+    await storage.write(const AuthTokens(accessToken: 'access-1', refreshToken: 'refresh-1'));
+    final member = {'firstName': 'Badr', 'lastName': 'Test', 'turnPosition': 2, 'hasProfilePhoto': false};
+    await tester.pumpWidget(JamiaApp(services: fakeServices((request) async {
+      switch (request.url.path) {
+        case '/api/users/me':
+          return http.Response(jsonEncode(userJson), 200);
+        case '/api/rooms':
+          return http.Response(jsonEncode([
+            {'id': 20, 'name': 'Test room', 'contributionAmount': 10, 'currency': 'OMR',
+             'frequency': 'FIVE_MINUTES', 'maxMembers': 3, 'status': 'ACTIVE', 'createdByMe': true},
+          ]), 200);
+        case '/api/rooms/20':
+          return http.Response(jsonEncode({
+            'id': 20, 'name': 'Test room', 'description': null, 'contributionAmount': 10, 'currency': 'OMR',
+            'frequency': 'FIVE_MINUTES', 'maxMembers': 3, 'status': 'ACTIVE', 'creatorUserId': 45,
+            'createdAt': '2026-09-30T14:00:00', 'completedRounds': 1,
+            'members': [
+              {'userId': 45, 'firstName': 'Salim', 'lastName': 'Al-Mughairi', 'turnPosition': 1, 'hasProfilePhoto': false},
+              {'userId': 7, ...member},
+            ],
+            'currentRound': {
+              'roundNumber': 2, 'status': 'ACTIVE', 'turnOrderMethod': 'RANDOM',
+              'startedAt': '2026-09-30T14:00:00', 'endsAt': '2026-09-30T14:10:00', 'completedAt': null,
+              'turnCount': 2, 'currentTurn': 2, 'currentRecipientUserId': 7,
+              'currentTurnEndsAt': '2026-09-30T14:10:00', 'paymentsTotal': 2, 'paymentsReceived': 1,
+            },
+          }), 200);
+      }
+      return http.Response('', 404);
+    }, storage: storage)));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Test room'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Round 2'), findsOneWidget);
+    expect(find.text('Turn 2 of 2'), findsOneWidget);
+    expect(find.text('Badr Test receives now'), findsOneWidget);
+    expect(find.text('Next turn at 14:10'), findsOneWidget);
+    expect(find.text('Payments'), findsOneWidget);
+    expect(find.text('Rounds history'), findsWidgets);
+    // During a round the admin cannot change the size or remove members.
+    expect(find.text('Change number of members'), findsNothing);
+
+    // Leave the screen so its 15-second refresh timer is cancelled before the test ends.
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+  });
 }

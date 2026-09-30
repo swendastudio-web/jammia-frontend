@@ -30,6 +30,8 @@ class ApiClient {
   Future<dynamic> put(String path, {Object? body, bool auth = true}) =>
       _send('PUT', path, body: body, auth: auth);
 
+  Future<dynamic> delete(String path, {bool auth = true}) => _send('DELETE', path, auth: auth);
+
   Future<dynamic> _send(String method, String path, {Object? body, required bool auth}) async {
     var response = await _request(method, path, body, auth);
 

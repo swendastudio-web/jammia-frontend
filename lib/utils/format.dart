@@ -15,6 +15,7 @@ String formatDate(DateTime date, String locale) => DateFormat.yMMMd(locale).form
 String formatDateTime(DateTime date, String locale) => DateFormat.yMMMd(locale).add_Hm().format(date);
 
 String frequencyLabel(AppLocalizations t, String frequency) => switch (frequency) {
+      'FIVE_MINUTES' => t.frequencyFiveMinutes,
       'WEEKLY' => t.frequencyWeekly,
       'BIWEEKLY' => t.frequencyBiweekly,
       'MONTHLY' => t.frequencyMonthly,
@@ -24,9 +25,11 @@ String frequencyLabel(AppLocalizations t, String frequency) => switch (frequency
 String roomStatusLabel(AppLocalizations t, String status) => switch (status) {
       'OPEN' => t.statusOpen,
       'ACTIVE' => t.statusActive,
-      'COMPLETED' => t.statusCompleted,
       _ => status,
     };
+
+/// -> "14:05"
+String formatTime(DateTime date, String locale) => DateFormat.Hm(locale).format(date);
 
 String contributionStatusLabel(AppLocalizations t, String status) => switch (status) {
       'PENDING' => t.paymentNotPaid,

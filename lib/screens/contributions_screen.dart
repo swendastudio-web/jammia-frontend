@@ -1,24 +1,28 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-import '../utils/error_text.dart';
 import '../l10n/app_localizations.dart';
 import '../models/contribution.dart';
 import '../models/room.dart';
 import '../services/api_exception.dart';
 import '../services/app_services.dart';
+import '../theme/app_theme.dart';
+import '../utils/error_text.dart';
 import '../utils/format.dart';
 import '../widgets/empty_state.dart';
 import '../widgets/load_error_view.dart';
 import '../widgets/status_chip.dart';
-import '../theme/app_theme.dart';
 
-/// The payment schedule of a started room, cycle by cycle.
-/// The payer taps "I paid"; the recipient taps "I received it".
+/// The payments of one round, turn by turn (default: the newest round).
+/// The payer taps "I paid"; the receiver taps "I received it".
+/// The turn moves by the clock: the current turn is marked "Now", unpaid past turns "Late".
 class ContributionsScreen extends StatefulWidget {
   final AppServices services;
   final Room room;
+  final int? roundNumber; // null = newest round
 
-  const ContributionsScreen({super.key, required this.services, required this.room});
+  const ContributionsScreen({super.key, required this.services, required this.room, this.roundNumber});
 
   @override
   State<ContributionsScreen> createState() => _ContributionsScreenState();
@@ -29,6 +33,7 @@ class _ContributionsScreenState extends State<ContributionsScreen> {
   String? _error;
   bool _loading = true;
   final Set<int> _busy = {};
+  Timer? _refreshTimer;
 
   int get _myId => widget.services.session.user!.id;
 
@@ -36,20 +41,33 @@ class _ContributionsScreenState extends State<ContributionsScreen> {
   void initState() {
     super.initState();
     _load();
+    // Watching the running round: refresh every 15 seconds so "Now" and "Late" stay correct.
+    if (widget.roundNumber == null) {
+      _refreshTimer = Timer.periodic(const Duration(seconds: 15), (_) => _load(quiet: true));
+    }
   }
 
-  Future<void> _load() async {
-    setState(() {
-      _loading = true;
-      _error = null;
-    });
+  @override
+  void dispose() {
+    _refreshTimer?.cancel();
+    super.dispose();
+  }
+
+  Future<void> _load({bool quiet = false}) async {
+    if (!quiet) {
+      setState(() {
+        _loading = true;
+        _error = null;
+      });
+    }
     try {
-      final items = await widget.services.contributions.getContributions(widget.room.id);
+      final items = await widget.services.contributions
+          .getContributions(widget.room.id, roundNumber: widget.roundNumber);
       if (mounted) setState(() => _items = items);
     } on ApiException catch (e) {
-      if (mounted) setState(() => _error = errorText(AppLocalizations.of(context), e));
+      if (mounted && !quiet) setState(() => _error = errorText(AppLocalizations.of(context), e));
     } finally {
-      if (mounted) setState(() => _loading = false);
+      if (mounted && !quiet) setState(() => _loading = false);
     }
   }
 
@@ -88,8 +106,10 @@ class _ContributionsScreenState extends State<ContributionsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
+    final round = widget.roundNumber ?? _items?.firstOrNull?.roundNumber;
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context).payments)),
+      appBar: AppBar(title: Text(round == null ? t.payments : '${t.payments} · ${t.roundTitle(round)}')),
       body: _buildBody(),
     );
   }
@@ -107,10 +127,10 @@ class _ContributionsScreenState extends State<ContributionsScreen> {
       );
     }
 
-    // Group by cycle: {1: [...], 2: [...]}
-    final cycles = <int, List<Contribution>>{};
+    // Group by turn: {1: [...], 2: [...]}
+    final turns = <int, List<Contribution>>{};
     for (final c in items) {
-      cycles.putIfAbsent(c.cycleNumber, () => []).add(c);
+      turns.putIfAbsent(c.cycleNumber, () => []).add(c);
     }
 
     return RefreshIndicator(
@@ -120,19 +140,26 @@ class _ContributionsScreenState extends State<ContributionsScreen> {
         children: [
           Text(t.noMoneyNote, style: const TextStyle(color: AppTheme.darkGray)),
           const SizedBox(height: 16),
-          for (final entry in cycles.entries) _buildCycle(entry.key, entry.value),
+          for (final entry in turns.entries) _buildTurn(entry.key, entry.value),
         ],
       ),
     );
   }
 
-  Widget _buildCycle(int cycle, List<Contribution> list) {
+  Widget _buildTurn(int turn, List<Contribution> list) {
     final t = AppLocalizations.of(context);
     final locale = Localizations.localeOf(context).toLanguageTag();
-    final recipient = list.first.recipient;
+    final first = list.first;
+    final recipient = first.recipient;
     final confirmed = list.where((c) => c.status == 'CONFIRMED').length;
-    final total = formatMoney(list.first.amount * (list.length + 1), widget.room.currency, locale);
+    final total = formatMoney(first.amount * (list.length + 1), widget.room.currency, locale);
+    final now = DateTime.now();
+    final isNow = !now.isBefore(first.dueAt) && now.isBefore(first.turnEndsAt);
+    final when = widget.room.isFiveMinuteTest ? formatDateTime(first.dueAt, locale) : formatDate(first.dueAt, locale);
+
     return Card(
+      key: Key('turn-$turn'),
+      color: isNow ? AppTheme.lightGray : null,
       margin: const EdgeInsets.only(bottom: 12),
       child: Padding(
         padding: const EdgeInsets.all(12),
@@ -141,18 +168,14 @@ class _ContributionsScreenState extends State<ContributionsScreen> {
           children: [
             Row(
               children: [
-                Expanded(
-                  child: Text(t.cycleHeader(cycle, formatDate(list.first.dueDate, locale)),
-                      style: Theme.of(context).textTheme.titleMedium),
-                ),
+                Expanded(child: Text(t.cycleHeader(turn, when), style: Theme.of(context).textTheme.titleMedium)),
+                if (isNow) ...[StatusChip(t.nowLabel, dark: true), const SizedBox(width: 4)],
                 StatusChip(t.receivedCount(confirmed, list.length), dark: confirmed == list.length),
               ],
             ),
             const SizedBox(height: 2),
             // Total = what the others pay + the receiver's own share (like the master prompt's example).
-            Text(recipient.userId == _myId
-                ? t.youReceiveTotal(total)
-                : t.personReceivesTotal(recipient.fullName, total)),
+            Text(recipient.userId == _myId ? t.youReceiveTotal(total) : t.personReceivesTotal(recipient.fullName, total)),
             const Divider(height: 20),
             ...list.map(_buildRow),
           ],
@@ -172,8 +195,7 @@ class _ContributionsScreenState extends State<ContributionsScreen> {
     if (iAmPayer && c.status == 'PENDING') {
       action = TextButton(onPressed: busy ? null : () => _act(c, confirm: false), child: Text(t.iPaid));
     } else if (iAmRecipient && c.status != 'CONFIRMED') {
-      action = TextButton(
-          onPressed: busy ? null : () => _act(c, confirm: true), child: Text(t.iReceivedIt));
+      action = TextButton(onPressed: busy ? null : () => _act(c, confirm: true), child: Text(t.iReceivedIt));
     }
 
     return Padding(
@@ -190,6 +212,7 @@ class _ContributionsScreenState extends State<ContributionsScreen> {
               ],
             ),
           ),
+          if (c.late) ...[StatusChip(t.late, dark: true), const SizedBox(width: 4)],
           StatusChip(contributionStatusLabel(t, c.status), dark: c.status == 'CONFIRMED'),
           if (action != null) ...[const SizedBox(width: 4), action],
         ],

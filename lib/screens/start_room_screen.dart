@@ -63,7 +63,7 @@ class _StartRoomScreenState extends State<StartRoomScreen> {
       await widget.services.rooms.startRoom(
         roomId: widget.room.id,
         turnOrderMethod: _method,
-        startDate: _startDate,
+        startDate: widget.room.isFiveMinuteTest ? null : _startDate,
         memberOrder: _method == 'MANUAL' ? _order.map((m) => m.userId).toList() : null,
       );
       if (mounted) Navigator.of(context).pop(true);
@@ -105,11 +105,14 @@ class _StartRoomScreenState extends State<StartRoomScreen> {
                   const SizedBox(height: 24),
                   Text(t.firstDueDate, style: Theme.of(context).textTheme.titleMedium),
                   const SizedBox(height: 8),
-                  OutlinedButton.icon(
-                    onPressed: _pickDate,
-                    icon: const Icon(Icons.calendar_today),
-                    label: Text(formatDate(_startDate, locale)),
-                  ),
+                  if (widget.room.isFiveMinuteTest)
+                    Text(t.fiveMinuteStartsNow, key: const Key('five-minute-note'))
+                  else
+                    OutlinedButton.icon(
+                      onPressed: _pickDate,
+                      icon: const Icon(Icons.calendar_today),
+                      label: Text(formatDate(_startDate, locale)),
+                    ),
                   if (_method == 'MANUAL') ...[
                     const SizedBox(height: 24),
                     Text(t.order, style: Theme.of(context).textTheme.titleMedium),
@@ -138,7 +141,11 @@ class _StartRoomScreenState extends State<StartRoomScreen> {
             ),
             Padding(
               padding: const EdgeInsets.all(16),
-              child: LoadingButton(label: t.startRoom, loading: _loading, onPressed: _start),
+              child: LoadingButton(
+                label: widget.room.completedRounds == 0 ? t.startRoom : t.startRoundNumber(widget.room.completedRounds + 1),
+                loading: _loading,
+                onPressed: _start,
+              ),
             ),
           ],
         ),

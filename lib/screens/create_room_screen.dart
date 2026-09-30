@@ -21,7 +21,7 @@ class CreateRoomScreen extends StatefulWidget {
 }
 
 class _CreateRoomScreenState extends State<CreateRoomScreen> {
-  static const _frequencies = ['WEEKLY', 'BIWEEKLY', 'MONTHLY'];
+  List<String> _frequencies = const ['WEEKLY', 'BIWEEKLY', 'MONTHLY'];
 
   final _formKey = GlobalKey<FormState>();
   final _name = TextEditingController();
@@ -38,6 +38,18 @@ class _CreateRoomScreenState extends State<CreateRoomScreen> {
   void initState() {
     super.initState();
     _loadPlanLimit();
+    _loadTestPeriod();
+  }
+
+  // A development backend also offers "Every 5 minutes (test)"; production never does.
+  Future<void> _loadTestPeriod() async {
+    try {
+      if (await widget.services.rooms.fiveMinuteCyclesEnabled() && mounted) {
+        setState(() => _frequencies = const ['FIVE_MINUTES', 'WEEKLY', 'BIWEEKLY', 'MONTHLY']);
+      }
+    } on ApiException {
+      // Not critical: without it, only the normal periods are offered.
+    }
   }
 
   // Shows "Your FREE plan allows up to 5 members" under the field.
