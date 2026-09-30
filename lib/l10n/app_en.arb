@@ -1,0 +1,329 @@
+{
+  "@@locale": "en",
+  "languageName": "English",
+  "appTagline": "Savings rooms with people you trust",
+  "chooseLanguageTitle": "Choose your language",
+  "continueButton": "Continue",
+  "language": "Language",
+  "email": "Email",
+  "password": "Password",
+  "firstName": "First name",
+  "lastName": "Last name",
+  "logIn": "Log in",
+  "noAccountSignUp": "Don't have an account? Sign up",
+  "createAccount": "Create account",
+  "passwordHelper": "8 to 72 characters",
+  "emailRequired": "Email is required",
+  "emailInvalid": "Enter a valid email address",
+  "passwordRequired": "Password is required",
+  "passwordLength": "Password must be 8 to 72 characters",
+  "firstNameRequired": "First name is required",
+  "lastNameRequired": "Last name is required",
+  "nameRequired": "Name is required",
+  "amountRequired": "Amount is required",
+  "amountAboveZero": "Enter an amount above 0",
+  "amountDecimals": "At most 2 decimal places",
+  "currencyLetters": "3 letters",
+  "enterNumber": "Enter a number",
+  "minTwoMembers": "A room needs at least 2 members",
+  "planAllowsUpTo": "Your plan allows up to {count} members",
+  "@planAllowsUpTo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "phoneFormat": "Use international format, e.g. +96891234567",
+  "currentPasswordRequired": "Current password is required",
+  "errorNetwork": "Cannot reach the JAMIA server. Check your connection and that the backend is running.",
+  "errorTimeout": "The JAMIA server took too long to answer. Please try again.",
+  "errorSessionExpired": "Your session has expired. Please log in again.",
+  "errorGeneric": "Something went wrong (error {code}).",
+  "@errorGeneric": {
+    "placeholders": {
+      "code": {
+        "type": "int"
+      }
+    }
+  },
+  "tryAgain": "Try again",
+  "myRooms": "My rooms",
+  "profile": "Profile",
+  "newRoom": "New room",
+  "noRoomsTitle": "No rooms yet",
+  "noRoomsMessage": "Create a savings room, or join one with an invite link from a friend.",
+  "joinWithInviteLink": "Join with invite link",
+  "creator": "Creator",
+  "roomCardSubtitle": "{amount} · {frequency} · up to {max} members",
+  "@roomCardSubtitle": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "frequency": {
+        "type": "String"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "statusOpen": "Open",
+  "statusActive": "Active",
+  "statusCompleted": "Completed",
+  "frequencyWeekly": "Weekly",
+  "frequencyBiweekly": "Every 2 weeks",
+  "frequencyMonthly": "Monthly",
+  "paymentNotPaid": "Not paid",
+  "paymentPaid": "Paid",
+  "paymentReceived": "Received",
+  "roomName": "Room name",
+  "descriptionOptional": "Description (optional)",
+  "amountPerPerson": "Amount per person",
+  "currency": "Currency",
+  "howOften": "How often",
+  "maximumMembers": "Maximum members",
+  "planAllowsHelper": "Your {plan} plan allows up to {count} members",
+  "@planAllowsHelper": {
+    "placeholders": {
+      "plan": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "createRoom": "Create room",
+  "inviteLink": "Invite link",
+  "showRoom": "Show room",
+  "pasteInviteLink": "Paste the invite link you received.",
+  "alreadyMember": "You are already a member of this room.",
+  "requestSent": "Request sent. The room creator will accept or reject it.",
+  "requestToJoin": "Request to join",
+  "referredBy": "Referred by",
+  "createdBy": "Created by",
+  "amount": "Amount",
+  "amountPerPersonValue": "{amount} per person",
+  "@amountPerPersonValue": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "members": "Members",
+  "countOfMax": "{count} of {max}",
+  "@countOfMax": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "room": "Room",
+  "perPersonEachCycle": "per person, each cycle",
+  "totalEachCycle": "Total each cycle",
+  "totalUpTo": "Up to {amount} (with {count} members)",
+  "@totalUpTo": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "firstDueDate": "First due date",
+  "turnOrder": "Turn order",
+  "turnOrderRandom": "Random",
+  "turnOrderManual": "Chosen by creator",
+  "invitePeople": "Invite people",
+  "startRoom": "Start room",
+  "startRoomNeedsMembers": "Start room (needs at least 2 members)",
+  "payments": "Payments",
+  "joinRequestsTitle": "Join requests ({count})",
+  "@joinRequestsTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noJoinRequests": "No one is waiting. Requests appear here when someone uses an invite link.",
+  "referredByName": "Referred by {name}",
+  "@referredByName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "askedAt": "Asked {date}",
+  "@askedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "reject": "Reject",
+  "accept": "Accept",
+  "nowMember": "{name} is now a member.",
+  "@nowMember": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "requestRejected": "Request from {name} rejected.",
+  "@requestRejected": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "membersTitle": "Members ({count} of {max})",
+  "@membersTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "nameYou": "{name} (you)",
+  "@nameYou": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "turnDecidedLater": "Turn decided when the room starts",
+  "turnInfo": "Turn {turn} · receives in cycle {turn}",
+  "@turnInfo": {
+    "placeholders": {
+      "turn": {
+        "type": "int"
+      }
+    }
+  },
+  "yourInviteLink": "Your invite link",
+  "inviteLinkExplanation": "Anyone who opens it can ask to join. The room creator accepts or rejects each request and sees that you referred them.",
+  "worksUntil": "Works until {date}",
+  "@worksUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "copyLink": "Copy link",
+  "linkCopied": "Link copied. Paste it in WhatsApp, Facebook, Instagram or SMS.",
+  "randomOption": "Random",
+  "iChoose": "I choose",
+  "randomExplanation": "JAMIA shuffles the members fairly when you start.",
+  "manualExplanation": "Drag members to set the order. The first one receives first.",
+  "order": "Order",
+  "turnNumber": "Turn {turn}",
+  "@turnNumber": {
+    "placeholders": {
+      "turn": {
+        "type": "int"
+      }
+    }
+  },
+  "startRoomConfirmTitle": "Start the room?",
+  "startRoomConfirmMessage": "After starting, nobody can join and the turn order cannot be changed. Requests still waiting will be rejected.",
+  "cancel": "Cancel",
+  "start": "Start",
+  "noPaymentsTitle": "No payments yet",
+  "noPaymentsMessage": "The schedule appears when the room creator starts the room.",
+  "noMoneyNote": "JAMIA does not move money. Members pay each other outside the app and record it here.",
+  "cycleHeader": "Cycle {cycle} · {date}",
+  "@cycleHeader": {
+    "placeholders": {
+      "cycle": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "receivedCount": "{done}/{total} received",
+  "@receivedCount": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "youReceiveTotal": "You receive {amount} in total (own share included)",
+  "@youReceiveTotal": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "personReceivesTotal": "{name} receives {amount} in total (own share included)",
+  "@personReceivesTotal": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "youPay": "You pay",
+  "personPays": "{name} pays",
+  "@personPays": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "iPaid": "I paid",
+  "iReceivedIt": "I received it",
+  "confirmReceivedTitle": "Confirm you received it?",
+  "confirmReceivedMessage": "{amount} from {name}.",
+  "@confirmReceivedMessage": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "yesReceived": "Yes, received",
+  "plan": "Plan",
+  "role": "Role",
+  "adminRole": "JAMIA admin",
+  "phoneOptional": "Phone (optional)",
+  "save": "Save",
+  "profileSaved": "Profile saved.",
+  "changePassword": "Change password",
+  "logOut": "Log out",
+  "currentPassword": "Current password",
+  "newPassword": "New password",
+  "passwordChanged": "Password changed. Your other devices were signed out."
+}
