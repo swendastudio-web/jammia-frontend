@@ -206,8 +206,16 @@ class _ContributionsScreenState extends State<ContributionsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(iAmPayer ? t.youPay : t.personPays(c.payer.fullName),
-                    style: const TextStyle(fontWeight: FontWeight.w600)),
+                Row(
+                  children: [
+                    Flexible(
+                      child: Text(iAmPayer ? t.youPay : t.personPays(c.payer.fullName),
+                          style: const TextStyle(fontWeight: FontWeight.w600)),
+                    ),
+                    // A payer who was removed but still owes this payment.
+                    if (!c.payer.active) ...[const SizedBox(width: 6), StatusChip(t.removedLabel)],
+                  ],
+                ),
                 Text(formatMoney(c.amount, widget.room.currency, locale), style: const TextStyle(fontSize: 12)),
               ],
             ),

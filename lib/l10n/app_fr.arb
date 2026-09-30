@@ -162,5 +162,15 @@
   "late": "En retard",
   "nowLabel": "Maintenant",
   "fiveMinuteStartsNow": "Cagnotte de test : la rotation commence maintenant et le tour change toutes les 5 minutes.",
-  "betweenRoundsNote": "Entre deux rotations, vous pouvez inviter, changer le nombre de membres et retirer des membres. Les membres peuvent partir."
+  "betweenRoundsNote": "Entre deux rotations, vous pouvez inviter, changer le nombre de membres et retirer des membres. Les membres peuvent partir.",
+  "owedBannerTitle": "Vous devez {amounts} ({count} paiements)",
+  "owedBannerAction": "Touchez pour les voir et les marquer comme payés.",
+  "owedPaymentsTitle": "Ce que vous devez",
+  "nothingOwed": "Vous ne devez rien pour le moment.",
+  "owedTo": "À {name}",
+  "owedRoundTurn": "Rotation {round} · tour {turn}",
+  "removedFromRoomNote": "Vous ne faites plus partie de cette cagnotte, mais vous devez encore ce paiement.",
+  "removedLabel": "Retiré",
+  "removeDuringRoundNotReceived": "{name} n'a pas encore reçu. Son tour sera supprimé, les suivants avancent et personne ne le paie. Ce qu'il doit déjà reste dû.",
+  "removeDuringRoundReceived": "{name} a déjà reçu. Il sera retiré mais doit encore payer les suivants, et JAMIA continuera à le lui rappeler."
 }

@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 
 import '../utils/error_text.dart';
 import '../l10n/app_localizations.dart';
+import '../models/owed_payment.dart';
 import '../models/room.dart';
 import '../services/api_exception.dart';
 import '../services/app_services.dart';
+import '../theme/app_theme.dart';
 import '../utils/format.dart';
 import '../widgets/empty_state.dart';
 import '../widgets/load_error_view.dart';
 import '../widgets/status_chip.dart';
 import 'create_room_screen.dart';
 import 'join_invite_screen.dart';
+import 'owed_payments_screen.dart';
 import 'profile_screen.dart';
 import 'room_details_screen.dart';
 
@@ -26,6 +29,7 @@ class RoomsScreen extends StatefulWidget {
 
 class _RoomsScreenState extends State<RoomsScreen> {
   List<RoomSummary>? _rooms;
+  List<OwedPayment> _owed = [];
   String? _error;
   bool _loading = true;
 
@@ -43,10 +47,21 @@ class _RoomsScreenState extends State<RoomsScreen> {
     try {
       final rooms = await widget.services.rooms.getMyRooms();
       if (mounted) setState(() => _rooms = rooms);
+      _loadOwed();
     } on ApiException catch (e) {
       if (mounted) setState(() => _error = errorText(AppLocalizations.of(context), e));
     } finally {
       if (mounted) setState(() => _loading = false);
+    }
+  }
+
+  // The "You owe" reminder. Not critical: if it can't load, the rooms still show.
+  Future<void> _loadOwed() async {
+    try {
+      final owed = await widget.services.contributions.getOwedPayments();
+      if (mounted) setState(() => _owed = owed);
+    } on ApiException {
+      // ignore
     }
   }
 
@@ -98,10 +113,61 @@ class _RoomsScreenState extends State<RoomsScreen> {
   }
 
   Widget _buildBody() {
-    final t = AppLocalizations.of(context);
     if (_loading && _rooms == null) return const Center(child: CircularProgressIndicator());
     if (_error != null && _rooms == null) return LoadErrorView(message: _error!, onRetry: _load);
+    return Column(
+      children: [
+        if (_owed.isNotEmpty) _buildOwedBanner(),
+        Expanded(child: _buildRooms()),
+      ],
+    );
+  }
 
+  // "You owe 20.00 OMR (2 payments)" — totals per currency. Tap to see and pay.
+  Widget _buildOwedBanner() {
+    final t = AppLocalizations.of(context);
+    final locale = Localizations.localeOf(context).toLanguageTag();
+    final totals = <String, num>{};
+    for (final p in _owed) {
+      totals[p.currency] = (totals[p.currency] ?? 0) + p.amount;
+    }
+    final amounts = totals.entries.map((e) => formatMoney(e.value, e.key, locale)).join(' + ');
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+      child: Material(
+        color: AppTheme.darkGray,
+        borderRadius: BorderRadius.circular(12),
+        child: InkWell(
+          key: const Key('owed-banner'),
+          borderRadius: BorderRadius.circular(12),
+          onTap: () => _open(OwedPaymentsScreen(services: widget.services)),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              children: [
+                const Icon(Icons.notifications_active_outlined, color: AppTheme.white),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(t.owedBannerTitle(amounts, _owed.length),
+                          style: const TextStyle(color: AppTheme.white, fontWeight: FontWeight.w600)),
+                      Text(t.owedBannerAction, style: const TextStyle(color: AppTheme.white, fontSize: 12)),
+                    ],
+                  ),
+                ),
+                const Icon(Icons.chevron_right, color: AppTheme.white),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRooms() {
+    final t = AppLocalizations.of(context);
     final rooms = _rooms ?? [];
     if (rooms.isEmpty) {
       return EmptyState(

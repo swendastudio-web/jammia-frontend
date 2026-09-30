@@ -207,4 +207,36 @@ void main() {
     await tester.pageBack();
     await tester.pumpAndSettle();
   });
+
+  testWidgets('"You owe" banner shows the total and opens the list with "I paid"', (tester) async {
+    final storage = FakeTokenStorage();
+    await storage.write(const AuthTokens(accessToken: 'access-1', refreshToken: 'refresh-1'));
+    final owed = [
+      for (final id in [1, 2])
+        {'contributionId': id, 'roomId': 9, 'roomName': 'Old room', 'currency': 'OMR', 'roundNumber': 1,
+         'cycleNumber': id + 1, 'dueAt': '2026-09-30T10:00:00', 'recipientName': 'Badr Test', 'amount': 10,
+         'late': true, 'stillMember': false},
+    ];
+    await tester.pumpWidget(JamiaApp(services: fakeServices((request) async {
+      switch (request.url.path) {
+        case '/api/users/me':
+          return http.Response(jsonEncode(userJson), 200);
+        case '/api/rooms':
+          return http.Response('[]', 200); // removed from the room: no rooms, but still owes
+        case '/api/users/me/owed-payments':
+          return http.Response(jsonEncode(owed), 200);
+      }
+      return http.Response('', 404);
+    }, storage: storage)));
+    await tester.pumpAndSettle();
+
+    expect(find.text('You owe 20.00 OMR (2 payments)'), findsOneWidget);
+    await tester.tap(find.byKey(const Key('owed-banner')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('What you owe'), findsOneWidget);
+    expect(find.text('To Badr Test'), findsNWidgets(2));
+    expect(find.text('You are no longer in this room, but you still owe this payment.'), findsNWidgets(2));
+    expect(find.text('I paid'), findsNWidgets(2));
+  });
 }

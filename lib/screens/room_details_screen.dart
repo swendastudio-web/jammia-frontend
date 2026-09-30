@@ -192,9 +192,20 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
     }
   }
 
+  // Between rounds: simply removed. During a round, the message explains what happens:
+  // not received yet -> turn removed, others move up; already received -> still owes the people after them.
   Future<void> _removeMember(RoomMember member) async {
     final t = AppLocalizations.of(context);
-    if (!await _confirm(t.removeMemberConfirm(member.fullName), t.remove)) return;
+    final round = _room!.currentRound;
+    final String message;
+    if (round == null) {
+      message = t.removeMemberConfirm(member.fullName);
+    } else if (member.turnPosition != null && member.turnPosition! > round.currentTurn) {
+      message = t.removeDuringRoundNotReceived(member.fullName);
+    } else {
+      message = t.removeDuringRoundReceived(member.fullName);
+    }
+    if (!await _confirm(message, t.remove)) return;
     try {
       await widget.services.rooms.removeMember(widget.roomId, member.userId);
       _showMessage(t.memberRemoved(member.fullName));
@@ -469,15 +480,22 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen> {
     final isCreator = m.userId == room.creatorUserId;
     final receivingNow = room.currentRound?.currentRecipientUserId == m.userId;
 
+    // The admin can remove any other member — between rounds, and also during a round (Phase B).
     Widget? trailing;
     if (isCreator) {
       trailing = StatusChip(t.creator);
-    } else if (_iAmCreator && room.isOpen) {
-      trailing = IconButton(
-        key: Key('remove-member-${m.userId}'),
-        tooltip: t.removeMember,
-        icon: const Icon(Icons.person_remove_outlined),
-        onPressed: () => _removeMember(m),
+    } else if (_iAmCreator) {
+      trailing = Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (receivingNow) StatusChip(t.nowLabel, dark: true),
+          IconButton(
+            key: Key('remove-member-${m.userId}'),
+            tooltip: t.removeMember,
+            icon: const Icon(Icons.person_remove_outlined),
+            onPressed: () => _removeMember(m),
+          ),
+        ],
       );
     } else if (receivingNow) {
       trailing = StatusChip(t.nowLabel, dark: true);

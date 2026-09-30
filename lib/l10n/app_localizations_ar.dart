@@ -577,4 +577,45 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get betweenRoundsNote =>
       'بين الجولات يمكنك دعوة أشخاص وتغيير عدد الأعضاء وإزالة أعضاء. ويمكن للأعضاء المغادرة.';
+
+  @override
+  String owedBannerTitle(String amounts, int count) {
+    return 'عليك $amounts ($count دفعات)';
+  }
+
+  @override
+  String get owedBannerAction => 'اضغط لعرضها وتسجيلها كمدفوعة.';
+
+  @override
+  String get owedPaymentsTitle => 'المبالغ المستحقة عليك';
+
+  @override
+  String get nothingOwed => 'لا توجد عليك مبالغ مستحقة الآن.';
+
+  @override
+  String owedTo(String name) {
+    return 'إلى $name';
+  }
+
+  @override
+  String owedRoundTurn(int round, int turn) {
+    return 'الجولة $round · الدور $turn';
+  }
+
+  @override
+  String get removedFromRoomNote =>
+      'لم تعد في هذه الغرفة، لكن هذه الدفعة ما زالت مستحقة عليك.';
+
+  @override
+  String get removedLabel => 'أُزيل';
+
+  @override
+  String removeDuringRoundNotReceived(String name) {
+    return 'لم يستلم $name بعد. سيُحذف دوره، ويتقدم من بعده، ولن يدفع له أحد. ما عليه من مبالغ حتى الآن يبقى مستحقاً.';
+  }
+
+  @override
+  String removeDuringRoundReceived(String name) {
+    return 'استلم $name بالفعل. ستتم إزالته لكنه يبقى مديناً لمن بعده، وسيستمر JAMIA في تذكيره.';
+  }
 }

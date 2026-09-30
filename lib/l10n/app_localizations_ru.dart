@@ -582,4 +582,45 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get betweenRoundsNote =>
       'Между раундами можно приглашать людей, менять число участников и удалять участников. Участники могут выйти.';
+
+  @override
+  String owedBannerTitle(String amounts, int count) {
+    return 'Вы должны $amounts (платежей: $count)';
+  }
+
+  @override
+  String get owedBannerAction => 'Нажмите, чтобы посмотреть и отметить оплату.';
+
+  @override
+  String get owedPaymentsTitle => 'Ваши долги';
+
+  @override
+  String get nothingOwed => 'Сейчас вы ничего не должны.';
+
+  @override
+  String owedTo(String name) {
+    return 'Кому: $name';
+  }
+
+  @override
+  String owedRoundTurn(int round, int turn) {
+    return 'Раунд $round · очередь $turn';
+  }
+
+  @override
+  String get removedFromRoomNote =>
+      'Вы больше не в этой комнате, но этот платёж всё ещё за вами.';
+
+  @override
+  String get removedLabel => 'Удалён';
+
+  @override
+  String removeDuringRoundNotReceived(String name) {
+    return '$name ещё не получал(а). Его очередь будет удалена, следующие сдвинутся вперёд, и никто ему не платит. Уже накопленный долг остаётся.';
+  }
+
+  @override
+  String removeDuringRoundReceived(String name) {
+    return '$name уже получил(а). Участник будет удалён, но останется должен следующим, и JAMIA будет напоминать об этом.';
+  }
 }

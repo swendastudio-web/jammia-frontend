@@ -1081,6 +1081,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Between rounds you can invite people, change the number of members and remove members. Members can leave.'**
   String get betweenRoundsNote;
+
+  /// No description provided for @owedBannerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You owe {amounts} ({count} payments)'**
+  String owedBannerTitle(String amounts, int count);
+
+  /// No description provided for @owedBannerAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to see them and mark them as paid.'**
+  String get owedBannerAction;
+
+  /// No description provided for @owedPaymentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What you owe'**
+  String get owedPaymentsTitle;
+
+  /// No description provided for @nothingOwed.
+  ///
+  /// In en, this message translates to:
+  /// **'You don\'t owe anything right now.'**
+  String get nothingOwed;
+
+  /// No description provided for @owedTo.
+  ///
+  /// In en, this message translates to:
+  /// **'To {name}'**
+  String owedTo(String name);
+
+  /// No description provided for @owedRoundTurn.
+  ///
+  /// In en, this message translates to:
+  /// **'Round {round} · turn {turn}'**
+  String owedRoundTurn(int round, int turn);
+
+  /// No description provided for @removedFromRoomNote.
+  ///
+  /// In en, this message translates to:
+  /// **'You are no longer in this room, but you still owe this payment.'**
+  String get removedFromRoomNote;
+
+  /// No description provided for @removedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Removed'**
+  String get removedLabel;
+
+  /// No description provided for @removeDuringRoundNotReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} has not received yet. Their turn will be removed, the people after them move up, and nobody pays them. What they already owe stays.'**
+  String removeDuringRoundNotReceived(String name);
+
+  /// No description provided for @removeDuringRoundReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} has already received. They will be removed but still owe the people after them, and JAMIA will keep reminding them.'**
+  String removeDuringRoundReceived(String name);
 }
 
 class _AppLocalizationsDelegate

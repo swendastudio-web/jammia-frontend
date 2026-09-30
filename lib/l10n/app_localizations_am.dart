@@ -571,4 +571,45 @@ class AppLocalizationsAm extends AppLocalizations {
   @override
   String get betweenRoundsNote =>
       'በዙሮች መካከል ሰዎችን መጋበዝ፣ የአባላትን ቁጥር መቀየርና አባላትን ማስወገድ ይችላሉ። አባላትም መውጣት ይችላሉ።';
+
+  @override
+  String owedBannerTitle(String amounts, int count) {
+    return '$amounts ዕዳ አለብዎት ($count ክፍያዎች)';
+  }
+
+  @override
+  String get owedBannerAction => 'ለማየትና እንደተከፈለ ለመመዝገብ ይንኩ።';
+
+  @override
+  String get owedPaymentsTitle => 'ያለብዎት ዕዳ';
+
+  @override
+  String get nothingOwed => 'አሁን ምንም ዕዳ የለብዎትም።';
+
+  @override
+  String owedTo(String name) {
+    return 'ለ$name';
+  }
+
+  @override
+  String owedRoundTurn(int round, int turn) {
+    return 'ዙር $round · ተራ $turn';
+  }
+
+  @override
+  String get removedFromRoomNote =>
+      'ከዚህ ክፍል ወጥተዋል፣ ነገር ግን ይህ ክፍያ አሁንም ይጠበቅብዎታል።';
+
+  @override
+  String get removedLabel => 'ተወግዷል';
+
+  @override
+  String removeDuringRoundNotReceived(String name) {
+    return '$name እስካሁን አልተቀበለም። ተራው ይሰረዛል፣ ከእሱ በኋላ ያሉት ወደፊት ይሄዳሉ፣ ማንም አይከፍለውም። እስካሁን ያለበት ዕዳ ይቀራል።';
+  }
+
+  @override
+  String removeDuringRoundReceived(String name) {
+    return '$name አስቀድሞ ተቀብሏል። ይወገዳል ነገር ግን ለቀጣዮቹ ዕዳ አለበት፣ JAMIA ማስታወሱን ይቀጥላል።';
+  }
 }

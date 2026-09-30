@@ -5,6 +5,7 @@ class RoomMember {
   final String lastName;
   final int? turnPosition;
   final bool hasProfilePhoto;
+  final bool active; // false = removed from (or left) the room, e.g. a payer who still owes
 
   const RoomMember({
     required this.userId,
@@ -12,6 +13,7 @@ class RoomMember {
     required this.lastName,
     required this.turnPosition,
     required this.hasProfilePhoto,
+    this.active = true,
   });
 
   String get fullName => '$firstName $lastName';
@@ -23,6 +25,7 @@ class RoomMember {
       lastName: json['lastName'] as String,
       turnPosition: json['turnPosition'] as int?,
       hasProfilePhoto: json['hasProfilePhoto'] as bool,
+      active: (json['active'] as bool?) ?? true,
     );
   }
 }

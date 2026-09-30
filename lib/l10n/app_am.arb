@@ -162,5 +162,15 @@
   "late": "ዘግይቷል",
   "nowLabel": "አሁን",
   "fiveMinuteStartsNow": "የሙከራ ክፍል፦ ዙሩ አሁን ይጀምራል፣ ተራው በየ5 ደቂቃው ይቀየራል።",
-  "betweenRoundsNote": "በዙሮች መካከል ሰዎችን መጋበዝ፣ የአባላትን ቁጥር መቀየርና አባላትን ማስወገድ ይችላሉ። አባላትም መውጣት ይችላሉ።"
+  "betweenRoundsNote": "በዙሮች መካከል ሰዎችን መጋበዝ፣ የአባላትን ቁጥር መቀየርና አባላትን ማስወገድ ይችላሉ። አባላትም መውጣት ይችላሉ።",
+  "owedBannerTitle": "{amounts} ዕዳ አለብዎት ({count} ክፍያዎች)",
+  "owedBannerAction": "ለማየትና እንደተከፈለ ለመመዝገብ ይንኩ።",
+  "owedPaymentsTitle": "ያለብዎት ዕዳ",
+  "nothingOwed": "አሁን ምንም ዕዳ የለብዎትም።",
+  "owedTo": "ለ{name}",
+  "owedRoundTurn": "ዙር {round} · ተራ {turn}",
+  "removedFromRoomNote": "ከዚህ ክፍል ወጥተዋል፣ ነገር ግን ይህ ክፍያ አሁንም ይጠበቅብዎታል።",
+  "removedLabel": "ተወግዷል",
+  "removeDuringRoundNotReceived": "{name} እስካሁን አልተቀበለም። ተራው ይሰረዛል፣ ከእሱ በኋላ ያሉት ወደፊት ይሄዳሉ፣ ማንም አይከፍለውም። እስካሁን ያለበት ዕዳ ይቀራል።",
+  "removeDuringRoundReceived": "{name} አስቀድሞ ተቀብሏል። ይወገዳል ነገር ግን ለቀጣዮቹ ዕዳ አለበት፣ JAMIA ማስታወሱን ይቀጥላል።"
 }

@@ -581,4 +581,45 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get betweenRoundsNote =>
       'Between rounds you can invite people, change the number of members and remove members. Members can leave.';
+
+  @override
+  String owedBannerTitle(String amounts, int count) {
+    return 'You owe $amounts ($count payments)';
+  }
+
+  @override
+  String get owedBannerAction => 'Tap to see them and mark them as paid.';
+
+  @override
+  String get owedPaymentsTitle => 'What you owe';
+
+  @override
+  String get nothingOwed => 'You don\'t owe anything right now.';
+
+  @override
+  String owedTo(String name) {
+    return 'To $name';
+  }
+
+  @override
+  String owedRoundTurn(int round, int turn) {
+    return 'Round $round · turn $turn';
+  }
+
+  @override
+  String get removedFromRoomNote =>
+      'You are no longer in this room, but you still owe this payment.';
+
+  @override
+  String get removedLabel => 'Removed';
+
+  @override
+  String removeDuringRoundNotReceived(String name) {
+    return '$name has not received yet. Their turn will be removed, the people after them move up, and nobody pays them. What they already owe stays.';
+  }
+
+  @override
+  String removeDuringRoundReceived(String name) {
+    return '$name has already received. They will be removed but still owe the people after them, and JAMIA will keep reminding them.';
+  }
 }
